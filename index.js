@@ -11,9 +11,39 @@ app.get('/tucutin.mp3', function(req, res){
 });
 
 io.on('connection', function(socket){
+
+	var cont = 0;
+	var last = null;
+	var banned = false;
+
   socket.on('chat message', function(msg){
-      // io.emit('chat message', msg);
-      socket.broadcast.emit('chat message', msg);
+
+      var now = Date.now();
+
+      if(banned){
+      	if(now - bannedTime > 10000)
+      		banned = false
+      }
+
+      if(cont == 1) {
+      	last = now
+      	
+      } else {
+
+      	if (now - last < 500) {
+      		// spam
+      		banned = true;
+      		bannedTime = now;
+
+      	} else {
+      		// valido
+      		// console.log('valido')
+      		last = Date.now();
+      	}
+      }
+
+      if(!banned)
+      	socket.broadcast.emit('chat message', msg);
   });
 });
 
