@@ -16,6 +16,11 @@ io.on('connection', function(socket){
 	var last = null;
 	var banned = false;
 
+	var trollMessage = {
+		user: 'Pulpin Bot',
+		msg: 'XUPALA LENTO! ... baneado por 10 seg'
+	}
+
   socket.on('chat message', function(msg){
 
       var now = Date.now();
@@ -27,13 +32,14 @@ io.on('connection', function(socket){
 
       if(cont == 1) {
       	last = now
-      	
+
       } else {
 
       	if (now - last < 500) {
       		// spam
       		banned = true;
       		bannedTime = now;
+      		socket.emit('chat message', trollMessage);
 
       	} else {
       		// valido
