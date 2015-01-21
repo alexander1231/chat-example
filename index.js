@@ -17,6 +17,7 @@ io.on('connection', function(socket){
 	var banned = false;
 
 	var trollMessage = {
+		isBot: true,
 		user: 'Pulpin Bot',
 		msg: 'XUPALA LENTO! ... baneado por 10 seg'
 	}
