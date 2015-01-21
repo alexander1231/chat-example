@@ -44,7 +44,6 @@ io.on('connection', function(socket){
 
       	} else {
       		// valido
-      		// console.log('valido')
       		last = Date.now();
       	}
       }

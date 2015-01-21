@@ -25,14 +25,14 @@
       var socket = io();
       $('form').submit(function(){
 
-          $('#messages').append($('<li>').html('<b>'+ asd + ': </b>'+ $('#m').val() ));
+          $('#messages').prepend($('<li>').html('<b>'+ asd + ': </b>'+ $('#m').val() ));
           socket.emit('chat message', { msg: $('#m').val(), user:asd, fecha:'dasd'});
           $('#m').val('');
 
           return false;
       });
       socket.on('chat message', function(msg){
-        $('#messages').append($('<li>').html('<b>'+msg.user + ': </b>'+ msg.msg));
+        $('#messages').prepend($('<li>').html('<b>'+msg.user + ': </b>'+ msg.msg));
         var audio = new Audio('tucutin.mp3');
 
         if(!msg.isBot)
